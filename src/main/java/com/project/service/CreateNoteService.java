@@ -51,6 +51,9 @@ public class CreateNoteService implements ServerService<Note> {
             } else {
                 // Nếu danh sách không rỗng, lấy ID tiếp theo của note
                 Note lastNote = existNotes.get(existNotes.size() - 1);
+                for(Note note : existNotes){
+                    System.out.println(note.getId());
+                }
                 note.setId(lastNote.getId() + 1);
             }         
         }

@@ -1,7 +1,6 @@
 package com.project.noteapp;
 
 import com.project.controllers.LoginController;
-import com.project.controllers.RegisterController;
 import java.io.IOException;
 import java.util.Optional;
 import javafx.application.Application;

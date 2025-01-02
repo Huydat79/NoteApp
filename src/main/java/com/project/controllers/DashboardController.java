@@ -44,10 +44,6 @@ import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class cho Dashboard GUI
- * 
- * @author Nhóm 23
- * @since 07/04/2024
- * @version 1.0
  */
 public class DashboardController extends Controller {
     //Các thuộc tính FXML của form dashboard chung
@@ -599,24 +595,54 @@ public class DashboardController extends Controller {
 
     protected void importFile() {
         try {
-            //Lấy số trang
+            // Lấy số trang
             int numOfPage = PdfService.getNumberOfPage(importFileName.getText());
-            //Lấy dữ liệu từ PDF và chuyển vào content
-            String contents = "";
-            for(int i = 1; i <= numOfPage; i++) {
-                contents += PdfService.read(importFileName.getText(), i);
-                contents += "\n----------------------\n";
+            // Lấy dữ liệu từ PDF và chuyển vào content
+            StringBuilder contents = new StringBuilder();
+            for (int i = 1; i <= numOfPage; i++) {
+                contents.append(PdfService.read(importFileName.getText(), i));
+                contents.append("\n----------------------\n");
             }
-            
-            //Thông báo
-            showAlert(Alert.AlertType.INFORMATION, "Succesfully import");
-            //Chuyển sang main
-            mainScene.setVisible(true);
-            extraServiceScene.setVisible(false);
+
+            // Thông báo
+            showAlert(Alert.AlertType.INFORMATION, "Successfully imported");
+
+            // Hiển thị dialog nhập tiêu đề cho note mới
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Create new note");
+            dialog.setHeaderText("Enter header for your new note");
+
+            // Lấy kết quả từ dialog
+            Optional<String> confirm = dialog.showAndWait();
+
+            // Xử lý kết quả khi nhấn OK
+            confirm.ifPresent(selectedHeader -> {
+                // Khởi tạo note mới
+                Note newNote = new Note();
+                newNote.setAuthor(myUser.getUsername());
+                newNote.setHeader(selectedHeader);
+                newNote.setContent(contents.toString());  // Chuyển StringBuilder thành String
+                newNote.setLastModifiedDate(Date.valueOf(LocalDate.now()));
+
+                // Tạo Note mới
+                try {
+                    // Tạo thành công
+                    CreateNoteService noteService = new CreateNoteService(newNote);
+                    newNote = noteService.execute();
+                    showAlert(Alert.AlertType.INFORMATION, "Successfully created: " + newNote.getHeader());
+
+                    // Thêm vào danh sách và load lại
+                    myNotes.add(newNote);
+                    initMyNotesScene(myNotes);
+                } catch (DataAccessException ex) {
+                    showAlert(Alert.AlertType.ERROR, "Error creating note: " + ex.getMessage());
+                }
+            });
         } catch (IOException ex) {
             showAlert(Alert.AlertType.ERROR, "Can't read this file");
         }
     }
+
 
     protected void chooseFileToInput() {
         //Tạo FileChooser

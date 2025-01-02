@@ -71,7 +71,7 @@ public class NoteDataAccess implements BasicDataAccess<Note, NoteKey, UserKey> {
         String query = "SELECT nt.NOTE_ID AS ID, us.USERNAME AS AUTHOR, nt.HEADER, nt.CONTENT, nt.LASTMODIFIED, nt.LASTMODIFIEDDATE "
                 + "FROM notes nt "
                 + "JOIN users us ON nt.user_id = us.user_id "
-                + "ORDER BY nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc, nt.NOTE_ID";
+                + "ORDER BY nt.NOTE_ID, nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc";
 
         try {
             //Set các tham số, thực thi truy vấn và lấy kết quả
@@ -116,7 +116,7 @@ public class NoteDataAccess implements BasicDataAccess<Note, NoteKey, UserKey> {
                 + "FROM notes nt "
                 + "JOIN users us ON nt.USER_ID = us.user_id "
                 + "WHERE us.username =? "
-                + "ORDER BY nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc, nt.NOTE_ID ";
+                + "ORDER BY nt.NOTE_ID, nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc  ";
 
         try {
             //Set các tham số, thực thi truy vấn và lấy kết quả
@@ -156,7 +156,7 @@ public class NoteDataAccess implements BasicDataAccess<Note, NoteKey, UserKey> {
                 + "FROM notes nt "
                 + "JOIN users us ON nt.USER_ID = us.user_id "
                 + "WHERE nt.note_id = ? "
-                + "ORDER BY nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc, nt.NOTE_ID ";
+                + "ORDER BY nt.NOTE_ID, nt.LASTMODIFIED desc, nt.LASTMODIFIEDDATE desc ";
 
         try {
             //Set các tham số, thực thi truy vấn và lấy kết quả
