@@ -3,6 +3,8 @@ package com.project.controllers;
 import com.project.dataaccess.DataAccessException;
 import com.project.entity.Note;
 import com.project.entity.NoteFilter;
+import com.project.entity.ShareNote;
+import com.project.entity.ShareNote.ShareType;
 import com.project.entity.User;
 import com.project.service.GetAllNotesService;
 import com.project.service.SaveNoteService;
@@ -61,14 +63,20 @@ public class EditNoteViewController extends Controller {
     
     private User myUser;
     private Note myNote;
+    private ShareNote shareNote = (ShareNote)(myNote);
 
-
+    
+    
     public void setMyUser(User myUser) {
         this.myUser = myUser;
     }
     
     public void setMyNote(Note myNote) {
         this.myNote = myNote;
+    }
+    
+    public void setShareNote(ShareNote shareNote){
+        this.shareNote = shareNote;
     }
     
     @Override
@@ -87,11 +95,25 @@ public class EditNoteViewController extends Controller {
             saveMyNote();
         });
         addFilterButton.setOnAction((ActionEvent event) -> {
-            addFilter();
+            if(shareNote == null){
+                addFilter();
+            }
+            else {
+                if(shareNote.getShareType() == ShareType.CAN_EDIT){
+                    addFilter();
+                }
+            }
         });
        
-        addTextBlockButton.setOnAction((ActionEvent event) -> {
-            textLayout.setEditable(true);
+        addTextBlockButton.setOnAction((ActionEvent event) -> {            
+            if(shareNote == null){
+                textLayout.setEditable(true);
+            }
+            else {
+                if(shareNote.getShareType() == ShareType.CAN_EDIT){
+                    textLayout.setEditable(true);
+                }
+            }
         });
     }
     

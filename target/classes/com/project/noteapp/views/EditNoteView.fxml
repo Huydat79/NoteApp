@@ -78,23 +78,6 @@
                         <Insets top="3.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="openNoteButton" alignment="CENTER" mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0" styleClass="main-button" textOverrun="CLIP">
-                     <graphic>
-                        <VBox alignment="CENTER" prefHeight="60.0" prefWidth="50.0">
-                           <children>
-                              <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../image/envelope-open-text.png" />
-                                 </image>
-                              </ImageView>
-                              <Label text="Open" />
-                           </children>
-                        </VBox>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets top="3.0" />
-                     </HBox.margin>
-                  </Button>
                   <Line endX="-100.0" endY="70.0" layoutY="10.0" opacity="0.25" startX="-100.0">
                      <HBox.margin>
                         <Insets top="3.0" />

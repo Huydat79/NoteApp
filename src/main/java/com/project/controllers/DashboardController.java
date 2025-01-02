@@ -377,7 +377,7 @@ public class DashboardController extends Controller {
                             OpenNoteService noteService = new OpenNoteService(noteCardFXMLController.getShareNote().getId());
                             currentNote = noteService.execute();
                             //Load lại Edit Scene và mở Edit Scene
-                            openEditNoteView(myUser, currentNote);
+                            openEditNoteView(myUser, currentNote, noteCardFXMLController.getShareNote());
                         } catch (DataAccessException ex) {
                             showAlert(Alert.AlertType.ERROR, ex.getMessage());
                         }
@@ -717,6 +717,31 @@ public class DashboardController extends Controller {
             showAlert(Alert.AlertType.ERROR, "Can't open edit view");
         }
     }
+    
+    protected void openEditNoteView(User user, Note note, ShareNote shareNote) {
+        try {
+            FXMLLoader fXMLLoader = new FXMLLoader();
+            String registerViewPath = "/com/project/noteapp/views/EditNoteView.fxml";
+            fXMLLoader.setLocation(getClass().getResource(registerViewPath));
+
+            scene = new Scene(fXMLLoader.load());
+            
+            EditNoteViewController controller = fXMLLoader.getController();
+            controller.setStage(stage);
+            controller.setMyUser(user);
+            controller.setMyNote(note);
+            controller.setShareNote(shareNote);
+            controller.init();
+            // controller.setOnAutoUpdate();
+            
+            setSceneMoveable();
+            
+            stage.setScene(scene);  
+        } catch (IOException ex) {
+            showAlert(Alert.AlertType.ERROR, "Can't open edit view");
+        }
+    }
+
     
     protected void openLogin() {
         try {

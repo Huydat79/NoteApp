@@ -17,7 +17,7 @@ public class Note {
     private int lastModified;
     private Date lastModifiedDate;
     private List<NoteFilter> filters;
-    
+  
     /**
      * Constructor và cài đặt dữ liệu default cho Note
      */
@@ -49,15 +49,6 @@ public class Note {
         this.id = id;
     }
     
-//    public int getUser_id() {
-//        return user_id;
-//    }
-//
-//    public void setUser_id(int user_id) {
-//        this.user_id = user_id;
-//    }
-    
-        
     public String getAuthor() {
         return author;
     }
