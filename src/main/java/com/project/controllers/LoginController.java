@@ -18,10 +18,6 @@ import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class cho Login GUI
- * 
- * @author Nhóm 23
- * @since 31/03/2024
- * @version 1.0
  */
 public class LoginController extends Controller {   
     //Các thuộc tính FXML

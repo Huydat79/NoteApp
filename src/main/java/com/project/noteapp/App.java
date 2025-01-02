@@ -16,9 +16,6 @@ import javafx.stage.StageStyle;
 
 /**
  * Class chính của project, tạo ứng dụng chạy cho user
- * @author Nhóm 23
- * @since 30/03/2024
- * @version 1.0
  */
 public class App extends Application {
     private double posX, posY;

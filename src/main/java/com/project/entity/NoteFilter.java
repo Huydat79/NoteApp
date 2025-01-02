@@ -2,10 +2,7 @@ package com.project.entity;
 
 import java.util.Objects;
 
-/**
- *
- * @author admin
- */
+
 public class NoteFilter {
     private String filterContent;
 
